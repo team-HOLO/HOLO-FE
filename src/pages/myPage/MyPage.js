@@ -1,8 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Box, Tabs, Tab } from '@mui/material';
-import MyInfo from 'pages/myPage/MyInfo'; // 나의 정보 관리 컴포넌트
 import MyOrderPage from 'pages/myPage/MyOrderPage'; // 나의 주문 목록
+import MemberUpdatePage from "pages/MemberUpdate";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,7 +51,7 @@ const MyPage = () => {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <MyInfo /> {/* 나의 정보 관리 컴포넌트 */}
+          <MemberUpdatePage /> {/* 나의 정보 관리 컴포넌트 */}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <MyOrderPage /> {/* 나의 주문 목록 컴포넌트 */}
