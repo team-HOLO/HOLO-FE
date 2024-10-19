@@ -33,7 +33,7 @@ function Main() {
     const apiUrl = process.env.REACT_APP_API_URL;
 
     const fetchProducts = async (page, size) => {
-        const response = await axios.get(`${apiUrl}api/products`, {
+        const response = await axios.get(`${apiUrl}/api/products`, {
             params: {
                 page: page,
                 size: size,
