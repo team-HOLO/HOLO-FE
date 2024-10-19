@@ -119,6 +119,8 @@ export default function SignUp() {
     return isValid;
   };
 
+  const apiUrl=process.env.REACT_APP_API_URL;
+
   const handleSubmit = (event) => {
     event.preventDefault(); // 기본 폼 제출 동작을 막음
     if (!validateInputs()) return; // 유효성 검사가 통과하지 않으면 요청하지 않음
@@ -134,7 +136,7 @@ export default function SignUp() {
       isAdmin: false, // 기본 값 false
     };
 
-    fetch("/api/members/signup", {
+    fetch(`${apiUrl}/api/members/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

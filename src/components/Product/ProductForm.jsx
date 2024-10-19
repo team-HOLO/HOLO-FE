@@ -25,9 +25,11 @@ const ProductForm = ({ open, product, onClose }) => {
     const [subCategories, setSubCategories] = useState([]);
     const [selectedSubCategory, setSelectedSubCategory] = useState('');
 
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     useEffect(() => {
 
-        axios.get('/api/categories/all')
+        axios.get(`${apiUrl}/api/categories/all`)
             .then(response => {
                 // 모든 하위 카테고리를 추출하여 상태로 저장
                 const allSubCategories = response.data.flatMap(category => category.subCategories);
@@ -205,7 +207,7 @@ const ProductForm = ({ open, product, onClose }) => {
         if (!product) {
             try {
 
-                const response = await axios.post('http://localhost:8080/api/products', formData);
+                const response = await axios.post(`${apiUrl}/api/products`, formData);
                 if (response.ok) {
                     const data = await response.json();
                     alert('상품 등록 성공');
@@ -219,7 +221,7 @@ const ProductForm = ({ open, product, onClose }) => {
         } else {  //카테고리 수정
             try {
 
-                const response = await axios.put('http://localhost:8080/api/products/${product.productId}', formData);
+                const response = await axios.put(`${apiUrl}/api/products/${product.productId}`, formData);
 
                 if (response.ok) {
                     const data = await response.json();

@@ -26,10 +26,12 @@ const ProductDetails = () => {
         setQuantity(value);
     };
 
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`/api/products/${productId}`);
+                const response = await axios.get(`${apiUrl}/api/products/${productId}`);
                 setProduct(response.data);
             } catch (error) {
                 console.error('Error fetching product:', error);
@@ -40,7 +42,7 @@ const ProductDetails = () => {
     }, [productId]);
 
 
-    //장바구니 담기 
+    //장바구니 담기
     const handleAddToCart = async () => {
 
         if (!color || !size) {
@@ -55,9 +57,9 @@ const ProductDetails = () => {
             color,
             size,
         };
-    
+
         try {
-            const response = await axios.post('/api/cart', data, {
+            const response = await axios.post(`${apiUrl}/api/cart`, data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -65,13 +67,13 @@ const ProductDetails = () => {
 
             console.log('장바구니에 추가되었습니다:', response.data);
 
-            //alert 추가 
+            //alert 추가
         } catch (error) {
             console.error('장바구니 추가 중 오류 발생:', error);
         }
     };
 
-    //바로 주문 
+    //바로 주문
     const handleOrder = async () => {
 
         if (!color || !size) {
@@ -86,9 +88,9 @@ const ProductDetails = () => {
             color,
             size,
         };
-    
+
         try {
-            const response = await axios.post('/api/orders', data, {
+            const response = await axios.post(`${apiUrl}/api/orders`, data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -96,7 +98,7 @@ const ProductDetails = () => {
 
             console.log('주문이 완료되었습니다.', response.data);
 
-            //alert 추가 
+            //alert 추가
         } catch (error) {
             console.error('주문 중 오류 발생:', error);
         }

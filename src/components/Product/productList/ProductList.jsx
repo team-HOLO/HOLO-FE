@@ -6,8 +6,10 @@ import axios from 'axios';
 
 const filePath = 'https://holo-bucket.s3.ap-northeast-2.amazonaws.com/'
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const fetchProducts = async (page, size) => {
-    const response = await axios.get('api/products', {
+    const response = await axios.get(`${apiUrl}/api/products`, {
         params: {
             page: page,
             size: size,
