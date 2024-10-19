@@ -20,9 +20,11 @@ const ProductManagementPage = () => {
     fetchProducts();
   }, [page]);
 
-  const fetchProducts = async () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    const fetchProducts = async () => {
       try {
-      const response = await axios.get('/api/admin/products', {
+      const response = await axios.get(`${apiUrl}/api/admin/products`, {
         params: {
           page,
           size: 10, // 고정된 페이지 크기
@@ -40,7 +42,7 @@ const ProductManagementPage = () => {
   };
 
   const handleFormSubmit = (newProduct) => {
-    axios.post('/api/products', newProduct)
+    axios.post(`${apiUrl}/api/products`, newProduct)
       .then(() => {
         fetchProducts();
         setFormOpen(false);
@@ -50,7 +52,7 @@ const ProductManagementPage = () => {
 
   const handleEdit = async (product) => {
     try {
-      const response = await axios.get(`/api/products/${product.productId}`);
+      const response = await axios.get(`${apiUrl}/api/products/${product.productId}`);
       setSelectedProduct(response.data);
       setFormOpen(true);
     } catch (error) {
@@ -65,7 +67,7 @@ const ProductManagementPage = () => {
 
   const handleDeleteConfirm = async (productId) => {
     try {
-        await axios.delete(`/api/products/${productId}`);
+        await axios.delete(`${apiUrl}/api/products/${productId}`);
         setDeleteDialogOpen(false);
         await fetchProducts();
     } catch (error) {

@@ -76,6 +76,7 @@ export default function SignIn(props) {
     setOpen(false);
   };
 
+  const apiUrl=process.env.REACT_APP_API_URL;
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent form from submitting the default way
     const data = new FormData(event.currentTarget);
@@ -86,7 +87,7 @@ export default function SignIn(props) {
     };
 
     try {
-      const response = await fetch("/api/members/login", {
+      const response = await fetch(`${apiUrl}/api/members/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

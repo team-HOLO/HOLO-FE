@@ -9,11 +9,13 @@ function Header({ isAdmin, categories, refreshCategories }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부 확인 state
   const location = useLocation(); // 페이지 위치 감지
 
+  const apiUrl=process.env.REACT_APP_API_URL;
+
   // 페이지가 로드되거나 변경될 때마다 관리자 권한 및 로그인 여부 확인
   useEffect(() => {
     const checkAdminStatus = async () => {
       try {
-        const response = await fetch("/api/members/check-admin", {
+        const response = await fetch(`${apiUrl}/api/members/check-admin`, {
           method: "GET",
           credentials: "include", // 쿠키 포함
         });
@@ -26,7 +28,7 @@ function Header({ isAdmin, categories, refreshCategories }) {
 
     const checkLoginStatus = async () => {
       try {
-        const response = await fetch("/api/members/check-login", {
+        const response = await fetch(`${apiUrl}/api/members/check-login`, {
           method: "GET",
           credentials: "include", // 쿠키 포함
         });
@@ -44,7 +46,7 @@ function Header({ isAdmin, categories, refreshCategories }) {
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/members/logout", {
+      await fetch(`${apiUrl}/api/members/logout`, {
         method: "POST",
         credentials: "include", // 쿠키 포함
       });
