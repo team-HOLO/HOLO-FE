@@ -93,6 +93,7 @@ export default function SignIn(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(loginData),
+        credentials: "include" // 쿠키를 포함하여 요청
       });
 
       if (response.ok) {
