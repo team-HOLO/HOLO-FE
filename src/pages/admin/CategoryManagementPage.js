@@ -42,6 +42,7 @@ const CategoryManagementPage = ({ refreshCategories }) => {
           direction,
           name: searchTerm,
         },
+        withCredentials: true, // 쿠키를 포함하여 요청
       });
       setCategories(response.data.content);
       setTotalElements(response.data.totalElements);
@@ -75,7 +76,9 @@ const CategoryManagementPage = ({ refreshCategories }) => {
 
   const handleFormSubmit = async (newCategory) => {
     try {
-      await axios.post(`${apiUrl}/api/categories`, newCategory);
+      await axios.post(`${apiUrl}/api/categories`, newCategory, {
+        withCredentials: true,
+      });
       await fetchCategories(); // 새 카테고리 목록을 먼저 가져옴
       handleFormClose();
     } catch (error) {
@@ -85,7 +88,9 @@ const CategoryManagementPage = ({ refreshCategories }) => {
 
   const handleEdit = async (category) => {
     try {
-      const response = await axios.get(`${apiUrl}/api/admin/categories/details/${category.categoryId}`);
+      const response = await axios.get(`${apiUrl}/api/admin/categories/details/${category.categoryId}`, {
+        withCredentials: true, // 쿠키 포함
+      });
       setSelectedCategory(response.data);
       setFormOpen(true);
     } catch (error) {
@@ -100,7 +105,9 @@ const CategoryManagementPage = ({ refreshCategories }) => {
 
   const handleDeleteConfirm = async (categoryId) => {
     try {
-      await axios.delete(`${apiUrl}/api/admin/categories/${categoryId}`);
+      await axios.delete(`${apiUrl}/api/admin/categories/${categoryId}`, {
+        withCredentials: true, // 쿠키 포함
+      });
       await fetchCategories();
       refreshCategories();
       handleFormClose();
