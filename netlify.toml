@@ -1,0 +1,9 @@
+# netlify.toml
+
+[[headers]]
+  for = "/api/*"  # /api로 시작하는 경로에만 CORS 설정을 적용
+  [headers.values]
+    Access-Control-Allow-Origin = "https://elice-holo.shop"  # 특정 도메인에서만 접근 허용
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Credentials = "true"
