@@ -43,7 +43,7 @@ const ProductManagementPage = () => {
   };
 
   const handleFormSubmit = (newProduct) => {
-    axios.post(axios.post(`${apiUrl}/api/products`, newProduct, { withCredentials: true })
+    axios.post(`${apiUrl}/api/products`, newProduct, { withCredentials: true })
       .then(() => {
         fetchProducts();
         setFormOpen(false);
