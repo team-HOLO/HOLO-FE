@@ -29,6 +29,7 @@ const ProductManagementPage = () => {
           page,
           size: 10, // 고정된 페이지 크기
         },
+        withCredentials: true
       });
       setProducts(response.data.content);
       setTotalElements(response.data.totalElements);
@@ -42,7 +43,7 @@ const ProductManagementPage = () => {
   };
 
   const handleFormSubmit = (newProduct) => {
-    axios.post(`${apiUrl}/api/products`, newProduct)
+    axios.post(axios.post(`${apiUrl}/api/products`, newProduct, { withCredentials: true })
       .then(() => {
         fetchProducts();
         setFormOpen(false);
@@ -52,7 +53,7 @@ const ProductManagementPage = () => {
 
   const handleEdit = async (product) => {
     try {
-      const response = await axios.get(`${apiUrl}/api/products/${product.productId}`);
+      const response = await axios.get(`${apiUrl}/api/products/${product.productId}`, { withCredentials: true });
       setSelectedProduct(response.data);
       setFormOpen(true);
     } catch (error) {
@@ -67,7 +68,7 @@ const ProductManagementPage = () => {
 
   const handleDeleteConfirm = async (productId) => {
     try {
-        await axios.delete(`${apiUrl}/api/products/${productId}`);
+        await axios.delete(`${apiUrl}/api/products/${productId}`, { withCredentials: true });
         setDeleteDialogOpen(false);
         await fetchProducts();
     } catch (error) {
